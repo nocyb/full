@@ -1,31 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+
+const Display = ({ counter }) => <div>{counter}</div>
+
+const Button = ({ onClick, text}) => <button onClick={onClick}>{text}</button>
+
+const History = ({ allClicks }) => {
+  if (allClicks.length === 0) {
+    return <div>the app can be used by pressing the buttons</div>
+  }
+  return <div>button press history: {allClicks.join(' ')}</div>
+}
 
 const App = () => {
-  const course = {
-    name: 'Half stack application development',
-    parts: [
-      { name: 'Fundamentals of React', exercices: 10},
-      { name: 'Using props to pass data', exercices: 7},
-      { name : 'State of a component', exercices: 14},
-    ]
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
   }
 
   return (
     <div>
-      <h1>{course.name}</h1>
-      <p>
-        {course.parts[0].name} {course.parts[0].exercices}
-      </p>
-      <p>
-        {course.parts[1].name} {course.parts[1].exercices}
-      </p>
-      <p>
-        {course.parts[2].name} {course.parts[2].exercices}
-      </p>
-      <p>Total number of exercices {course.parts[0].exercices + course.parts[1].exercices + course.parts[2].exercices}</p>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <History allClicks={allClicks}/>
     </div>
   )
 }
