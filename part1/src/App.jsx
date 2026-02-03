@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const Display = ({ counter }) => <div>{counter}</div>
 
-const Button = ({ onClick, text}) => <button onClick={onClick}>{text}</button>
+const Button = ({ handleClick, text}) => <button onClick={handleClick}>{text}</button>
 
 const History = ({ allClicks }) => {
   if (allClicks.length === 0) {
@@ -29,8 +29,8 @@ const App = () => {
   return (
     <div>
       {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <Button handleClick={handleLeftClick} text= 'left'/>
+      <Button handleClick={handleRightClick} text='right'/>
       {right}
       <History allClicks={allClicks}/>
     </div>
